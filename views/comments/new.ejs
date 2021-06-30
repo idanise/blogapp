@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+    <html> 
+        <head>
+            <title>Blog App Comments</title>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        </head>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                    <a class="navbar-brand" href="/">Blog App</a>
+                    <ul class="nav navbar-nav navbar-left">
+                        <li>    <a class="navbar-nav"   href="/blogs/new">New Post</a></li>
+                    </ul>
+                    <div class="collapse navbar-collapse d-flex justify-content-end pull-right">
+                        <ul class="nav navbar-nav navbar-right">
+                            <% if(!currentUser){ %>
+                                <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/register">SignUp</a></li>
+                            <% } else { %>
+                                <li> <a href="">Signed In As <%= currentUser.username %></a></li>
+                                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                            <% } %>
+                        </ul>
+                    </div>
+            </div>
+        </nav>
+        <div class="container">
+            <% if(error && error.length > 0){%>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+            <% } %>
+        </div>
+        <div class="container">
+            <% if(success && success.length > 0){%>
+                <div class="alert alert-success" role="alert">
+                    <%= success %>
+                </div>
+            <% } %>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <h1 style="text-align: center">Add a comment to <%= blog.title %> %></h1>
+                <div style="width: 30%; margin: 30px auto;">
+                    <form action="/category/:id/blogs/<%= blog._id %>/comments" method="POST">
+                        <div class="form-group">
+                            <input class="form-control" type="text" name="comment[text]" placeholder="text">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-large btn-primary btn-block">submit!</button>
+                        </div>
+                    </form>
+                    <a href="/blogs">Go back</a>
+                </div>
+            </div>
+        </div>
+
+
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</html>

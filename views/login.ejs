@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Blog App Login</title>
+        <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    </head>
+    <style>
+        form {
+            background: var(--color-darkblue-alpha);
+            padding: 2.5rem 0.625rem;
+            border-radius: 0.25rem;
+            color: black;
+        }
+
+        .form-group {
+            margin: 0 auto 1.25rem auto;
+            padding: 0.25rem;
+        }
+        .input-textarea {
+            min-height: 120px; 
+            width: 100%;
+            padding: 0.625rem;
+            resize: vertical;
+            padding: 0;
+            margin: 0;
+        }
+        label {
+        display: flex;
+        align-items: center;
+        font-size: 1.125rem; 
+        margin-bottom: 0.5rem
+        }
+    </style>
+    <body>
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                    <a class="navbar-brand" href="/">Blog App</a>
+                    <ul class="nav navbar-nav navbar-left">
+                        <li><a class="navbar-nav"   href="#">New Post</a></li>
+                    </ul>
+                    <div class="collapse navbar-collapse d-flex justify-content-end pull-right">
+                        <ul class="nav navbar-nav navbar-right">
+                            <% if(!currentUser){ %>
+                                <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                                <li class="nav-item"><a class="nav-link" href="/register">SignUp</a></li>
+                            <% } else { %>
+                                <li> <a href="">Signed In As <%= currentUser.username %></a></li>
+                                <li class="nav-item"><a class="nav-link" href="/logout">Logout</a></li>
+                            <% } %>
+                        </ul>
+                    </div>
+            </div>
+        </nav>
+        <div class="container">
+            <% if(error && error.length > 0){%>
+                <div class="alert alert-danger" role="alert">
+                    <%= error %>
+                </div>
+            <% } %>
+        </div>
+        <div class="container">
+            <% if(success && success.length > 0){%>
+                <div class="alert alert-success" role="alert">
+                    <%= success %>
+                </div>
+            <% } %>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <h1 style="text-align: center">Login</h1>
+                <div style="width: 30%; margin: 30px auto;">
+                    <form action="/login" method="POST">
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input class="form-control" type="text" name="username" placeholder="username">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input class="form-control" type="password" name="password" placeholder="password">
+                        </div>
+                        <button>SUBMIT</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </body>
+</html>
